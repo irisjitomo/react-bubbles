@@ -17,22 +17,21 @@ const ColorList = ({ colors, updateColors }, props) => {
     setColorToEdit(color);
   };
 
-  // useEffect(() => {
-  //   const id = colorToEdit.id;
-  //   const colorUpdate = colors.find(color => {
-  //     return `${color.id}` === id
-  //   })
-  //   if (colorUpdate) {
-  //     setColorToEdit(colorUpdate)
-  //   }
-  // }, [colorToEdit.id, colors])
+  useEffect(() => {
+    const id = colorToEdit.id;
+    const colorUpdate = colors.find(color => {
+      return `${color.id}` === id
+    })
+    if (colorUpdate) {
+      setColorToEdit(colorUpdate)
+    }
+  }, [colorToEdit.id, colors])
 
   const saveEdit = e => {
-    e.preventDefault();
+    // e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
-    
     console.log(colorToEdit)
     axiosWithAuth()
     .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
