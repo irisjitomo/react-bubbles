@@ -7,7 +7,7 @@ const initialColor = {
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }, props) => {
+const ColorList = ({ colors, updateColors, getColors }, props) => {
 
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -28,7 +28,7 @@ const ColorList = ({ colors, updateColors }, props) => {
   }, [colorToEdit.id, colors])
 
   const saveEdit = e => {
-    // e.preventDefault();
+    e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
@@ -36,9 +36,10 @@ const ColorList = ({ colors, updateColors }, props) => {
     axiosWithAuth()
     .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res => {
+      getColors();
       // updateColors(initialColor)
-      setColorToEdit(initialColor);
-      // props.history.push('/protected');
+      // setColorToEdit(initialColor);
+      // history.push('/protected');
       console.log(res)
     })
   };
