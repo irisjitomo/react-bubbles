@@ -29,18 +29,15 @@ const ColorList = ({ colors, updateColors, getColors }, props) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
     console.log(colorToEdit)
     axiosWithAuth()
     .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res => {
       getColors();
-      // updateColors(initialColor)
-      // setColorToEdit(initialColor);
-      // history.push('/protected');
       console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
     })
   };
 
@@ -50,6 +47,9 @@ const ColorList = ({ colors, updateColors, getColors }, props) => {
     .delete(`http://localhost:5000/api/colors/${color.id}`)
     .then(res => {
       getColors();
+    })
+    .catch(err => {
+      console.log(err)
     })
   };
 
