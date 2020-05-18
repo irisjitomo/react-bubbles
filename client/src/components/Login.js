@@ -22,6 +22,9 @@ const Login = (props) => {
     .post('/login', login)
     .then(res => {
       localStorage.setItem('token', res.data.payload);
+      // setting cookies
+      document.cookie = `token=${res.data.payload}; expires=` + new Date(2021, 0, 1)
+      .toUTCString()
       props.history.push('/protected');
       console.log('hello', res)
     })
