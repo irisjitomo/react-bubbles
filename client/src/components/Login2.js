@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import axios from 'axios';
+import React from "react";
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { Form, Field, withFormik } from 'formik';
 import * as yup from 'yup';
@@ -45,7 +44,7 @@ const Login2 = withFormik({
             // Setting Token to Local Storage
             localStorage.setItem('token', res.data.payload)
             // Setting Token to Cookies
-            document.cookie = `token=${res.data.payload}; expires =` + new Date(2021, 0, 1)
+            document.cookie = `tokenInCookies=${res.data.payload}; expires =` + new Date(2021, 0, 1)
             .toUTCString()
             props.history.push('/protected')
             console.log('hello', res)
