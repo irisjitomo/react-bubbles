@@ -21,12 +21,16 @@ const Login = (props) => {
     axiosWithAuth()
     .post('/login', login)
     .then(res => {
+      // setting token to local Storage
       localStorage.setItem('token', res.data.payload);
+      // setting token to cookies
+      document.cookie = `token=${res.data.payload}; expires=` + new Date(2021, 0, 1)
+      .toUTCString()
       props.history.push('/protected');
-      console.log(res)
+      console.log('hello', res)
     })
     .catch(err => console.log(err))
-  }
+  } 
 
   return (
     <>
